@@ -1,0 +1,4 @@
+mlflow==2.2.2
+setuptools<82
+dagshub
+dvc
