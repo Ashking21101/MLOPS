@@ -1,0 +1,84 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/data_ingestion.py
+    deps:
+    - path: src/data_ingestion.py
+      hash: md5
+      md5: 2192756b6c4923829ed2c64696dec3c6
+      size: 2374
+    outs:
+    - path: data/raw
+      hash: md5
+      md5: 6d7c9717b531961233cd66af69381384.dir
+      size: 817597
+      nfiles: 2
+  data_preprocessing:
+    cmd: python src/data_preprocessing.py
+    deps:
+    - path: data/raw
+      hash: md5
+      md5: 6d7c9717b531961233cd66af69381384.dir
+      size: 817597
+      nfiles: 2
+    - path: src/data_preprocessing.py
+      hash: md5
+      md5: 51be857b0060b62f7cf44687127f3a58
+      size: 2549
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 94e5f89803f9da6e0be502e0765c11ba.dir
+      size: 555834
+      nfiles: 2
+  feature_engineering:
+    cmd: python src/feature_engineering.py
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: 94e5f89803f9da6e0be502e0765c11ba.dir
+      size: 555834
+      nfiles: 2
+    - path: src/feature_engineering.py
+      hash: md5
+      md5: a593bc03dec4fbf2f9958a7291258333
+      size: 1735
+    outs:
+    - path: data/features
+      hash: md5
+      md5: 6392a18f76d9dbc7cca6b97ecf5929f1.dir
+      size: 1058440
+      nfiles: 2
+  model_building:
+    cmd: python src/model_building.py
+    deps:
+    - path: data/features
+      hash: md5
+      md5: 6392a18f76d9dbc7cca6b97ecf5929f1.dir
+      size: 1058440
+      nfiles: 2
+    - path: src/model_building.py
+      hash: md5
+      md5: 5e6582da40dddec85a8a97a8dd27285b
+      size: 841
+    outs:
+    - path: model.pkl
+      hash: md5
+      md5: d738281cf5c501e62232605817c410a4
+      size: 72029
+  model_evaluation:
+    cmd: python src/model_evaluation.py
+    deps:
+    - path: model.pkl
+      hash: md5
+      md5: d738281cf5c501e62232605817c410a4
+      size: 72029
+    - path: src/model_evaluation.py
+      hash: md5
+      md5: a421de6b4ef44e0d69893dd4f697b8d0
+      size: 1387
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 66d1fd996da4844f0364e14d3f1192a9
+      size: 141
