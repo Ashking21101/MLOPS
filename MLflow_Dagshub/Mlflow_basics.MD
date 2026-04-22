@@ -66,7 +66,7 @@ OR
 mlflow server --host 0.0.0.0 --default-artifact-root s3://mlops-bucket-2001 --backend-store-uri sqlite:///mlflow.db --allowed-hosts '*'
 
 
-#open Public IPv4 DNS to the port 5000
+#open Public IPv4 DNS to the port 5000 (meaning add :5000 at the end and use http and not https)
 
 
 #set uri in your local terminal and in your code 
