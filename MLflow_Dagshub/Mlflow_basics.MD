@@ -62,8 +62,14 @@ aws configure
 
 #Finally 
 mlflow server -h 0.0.0.0 --default-artifact-root s3://mlflow-tracking-buc25 --allowed-hosts *
-OR
-mlflow server --host 0.0.0.0 --default-artifact-root s3://mlops-bucket-2001 --backend-store-uri sqlite:///mlflow.db --allowed-hosts '*'
+OR (newer)
+mlflow server \
+  --host 0.0.0.0 \
+  --port 5000 \
+  --default-artifact-root s3://mlops-bucket-2001 \
+  --backend-store-uri sqlite:///mlflow.db \
+  --allowed-hosts '*' \
+  --cors-allowed-origins '*'
 
 
 #open Public IPv4 DNS to the port 5000 (meaning add :5000 at the end and use http and not https)
