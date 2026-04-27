@@ -1,0 +1,32 @@
+# Model Configuration
+model:
+  type: "RandomForest"
+  n_estimators: 100
+  max_depth: 10
+  random_state: 42
+
+# Training Parameters
+training:
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+# AWS SageMaker Configuration
+sagemaker:
+  region: "ap-south-1"
+  role_arn: "arn:aws:iam::919349292223:role/MySageMakerExecutionRole"
+  instance_type: "ml.m5.large"
+  instance_count: 1
+  job_name_prefix: "ml-training"
+  output_path: "s3://ashish-sagemaker-runs-2026/output"
+
+# Data Configuration
+data:
+  raw_path: "data/raw/data.csv"
+  processed_path: "data/processed/processed.csv"
+  target_column: "target"
+
+# MLflow Configuration
+mlflow:
+  tracking_uri: "http://localhost:5000"
+  experiment_name: "ml-sagemaker-experiment"
